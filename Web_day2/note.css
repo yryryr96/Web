@@ -1,0 +1,49 @@
+.total {
+  width: 700px;
+  height: 1000px;
+}
+
+.total>div {
+  margin: 0px auto;
+}
+.big {
+  width : 700px;
+  height : 600px;
+  display: inline-block;
+}
+
+h2 {
+  position:absolute;
+  color:white;
+  top:100px;
+  left:20px;
+  text-shadow: 0 0 10px black;
+}
+
+.btn {
+  text-align: center;
+  padding:5px;
+  position: absolute;
+  top: 160px;
+  left:20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px black;
+  background-color: white;
+  font-size:10px;
+  width:70px;
+  height:20px;
+}
+
+.middle{
+  position: absolute;
+  bottom: 10%;
+  left:9%;
+  width:400px;
+  height:200px;
+  background-color:antiquewhite;
+  text-align: center;
+}
+
+.middle>div{
+  text-align: center;
+}

@@ -73,6 +73,8 @@ href : 속성명
     - 속성 (Property) : 어떤 스타일 기능을 변경할지 결정
     - 값 (Value) : 어떻게 스타일 기능을 변경할지 결정
 
+
+
 - ####  CSS 구문 - 용어 정리
 
 ![image-20230307104421712](C:\Users\SSAFY\AppData\Roaming\Typora\typora-user-images\image-20230307104421712.png)
@@ -110,3 +112,24 @@ href : 속성명
     - 2. 우선 순위(Specificity)
 
       - 인라인 > id > class, 속성 > 요소
+
+- #### Box model
+
+  - 모든 HTML 요소는 box 형태로 되어있음
+  - 하나의 박스는 네 부분으로 이루어짐
+    - content - 글이나 이미지 등 요소의 실제 내용
+    - padding - 테두리 안쪽 내부 여백, 요소에 적용되는 배경색, 이미지는 padding까지 적용
+    - border - 테두리 영역
+    - margin - 테두리 바깥의 외부 여백, 배경색을 지정할 수 없음
+
+- #### CSS Display
+
+  - display : block
+    - 줄 바꿈이 일어나는 요소 (다른 요소를 밀어낸다)
+    - 화면 크기 전체의 가로 폭을 차지한다.
+    - 블록 레벨 요소 안에 인라인 레벨 요소가 들어갈 수 있음.
+  - display : inline
+    - 줄 바꿈이 일어나지 않는 행의 일부 요소
+    - content를 마크업 하고 있는 만큼만 가로 폭을 차지한다.
+    - width, height, margin-top, margin-bottom을 지정할 수 없다.
+    - 상하 여백은 line-height로 지정한다.
