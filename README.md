@@ -77,9 +77,7 @@ href : 속성명
 
 - ####  CSS 구문 - 용어 정리
 
-![image-20230307104421712](C:\Users\SSAFY\AppData\Roaming\Typora\typora-user-images\image-20230307104421712.png)
-
-- #### 선택자(Selector) 유형
+  ![001](C:\Users\SSAFY\Desktop\Web\images\001.png)
 
   - 기본 선택자
     - 전체 선택자(*), 요소(tag) 선택자
