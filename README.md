@@ -77,7 +77,7 @@ href : 속성명
 
 - ####  CSS 구문 - 용어 정리
 
-  ![001](C:\Users\SSAFY\Desktop\Web\images\001.png)
+  ![001](images\001.png)
 
   - 기본 선택자
     - 전체 선택자(*), 요소(tag) 선택자
