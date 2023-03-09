@@ -131,3 +131,80 @@ href : 속성명
     - content를 마크업 하고 있는 만큼만 가로 폭을 차지한다.
     - width, height, margin-top, margin-bottom을 지정할 수 없다.
     - 상하 여백은 line-height로 지정한다.
+
+- #### CSS Layout
+
+  - 웹 페이지의 구성 > 박스모델의 집단
+
+- #### Float
+
+  - 박스를 왼쪽 혹은 오른족으로 이동시켜 텍스트를 포함 인라인요소들이 주변을 감싸도록 함
+  - 요소가 Normal flow를 벗어나도록 함 > 공간을 차지하지 않는듯 ? 같은 자리의 블럭을 덮음
+  - float : left,right > 왼쪽, 오른쪽으로 몰아서 정렬
+  - Float은 레이아웃을 구성하기 위해 필수적으로 활용 되었으나, 최근 Flexbox, Grid 등장과 함께 사용도가 낮아짐
+  - Float 활용 전략 - Normal Flow에서 벗어난 레이아웃 구성
+    - 원하는 요소들을 Float로 지정하여 배치
+
+- #### Flexbox
+
+  - 행과 열 형태로 아이템들을 배치하는 1차원 레이아웃 모델
+  - 축
+    - main axis (메인 축)
+    - cross axis (교차 축)
+  - 구성 요소
+    - Flex Container (부모 요소)
+    - Flex Item (자식 요소)
+
+  <img src="images\image-20230309092631465.png" alt="image-20230309092631465" style="zoom:80%;" />
+
+  - Flexbox 축
+    - flex-direction : row
+  - Flexbox 구성 요소
+    - Flex Container (부모 요소)
+      - flexbox 레이아웃을 형성하는 가장 기본적인 모델
+      - Flex Item들이 놓여있는 영역
+      - display 속성을 flex 혹은 inline-flex로 지정
+    - Flex Item (자식 요소)
+      - 컨테이너에 속해 있는 컨텐츠(박스)
+
+- #### Flexbox 속성
+
+  - ##### justify-content
+
+    - Main axis 기준으로 공간 배분
+
+  - ##### align-content
+
+    - Cross axis 기준으로 공간 배분 (아이템이 한 줄로 배치되는 경우 확인할 수 없음)
+
+  ![image-20230309100524398](images\image-20230309100524398.png)
+
+  <img src="images\image-20230309101631292.png" alt="image-20230309101631292" style="zoom:80%;" />
+
+  - ##### align-items
+
+    - 모든 아이템을 Cross axis를 기준으로 정렬
+
+  <img src="images\image-20230309100650162.png" alt="image-20230309100650162" style="zoom:80%;" />
+
+  - ##### align-self
+
+    - 개별 아이템을 Cross axis 기준으로 정렬 
+      - 주의 ! 해당 속성은 컨테이너에 적용하는 것이 아니라 개별 아이템에 적용
+
+  
+
+  - ##### Cross axis를 중심으로
+
+    - stretch : 컨테이너를 가득 채움
+    - flex-start : 위
+    - flex-end: 아래
+    - center : 가운데
+    - baseline : 텍스트 baseline에 기준선을 맞춤
+
+  - <img src="images\image-20230309100712881.png" alt="image-20230309100712881" style="zoom:80%;" />
+
+  - #####  기타 속성
+
+    - flex-grow : 남은 영역을 아이템에 분배
+    - order : 배치 순서

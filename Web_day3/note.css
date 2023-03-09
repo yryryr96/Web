@@ -1,0 +1,71 @@
+.invalid {
+    display: flex;
+    align-items: center;
+    background-color: red;
+    color:white;
+    border-radius: 4px;
+    width:380px;
+    height:20px;
+    padding:10px;
+    font-size : 12px;
+}
+
+.word {
+    width:400px;
+    height:50px;
+    border-bottom : 1px solid black;
+}
+.signin {
+    display: flex;
+    width:400px;
+    height:50px;
+    align-items: center;
+    justify-content: center;
+    border-bottom : 3px solid cornflowerblue;
+}
+
+.main {
+    display:flex;
+    flex-direction: column;
+    border: 1px solid silver;
+    border-radius: 4px;
+    width : 400px;
+    height:260px;
+    margin-top: 10px;
+}
+.check {
+    display: flex;
+    justify-content: space-between;
+    padding-right:20px;
+    margin-top:15px;
+}
+.forgot {
+    color : cornflowerblue;
+}
+
+.sign {
+    display:flex;
+    background-color: forestgreen;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px; 
+    margin-top:15px;
+    border-radius: 4px;
+    font-size:14px;
+    height:40px;
+}
+.in {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    width:380px;
+    height:250px;
+    padding-left:20px;
+    padding-top:20px;
+}
+
+input {
+    width:350px;
+    height:20px;
+}
