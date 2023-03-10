@@ -1,0 +1,20 @@
+.box {
+
+    font-size:12px;
+    width :400px;
+    height:50px;
+    align-items: center;
+}
+
+.int {
+    font-size:14px;
+    font-weight: bold;
+    width : 200px;
+    height:30px;
+}
+
+.sign {
+    width:350px;
+    height:35px;
+}
+

@@ -1,0 +1,24 @@
+.box {
+    
+    width : 100%;
+    height : 280px;
+    background-size: cover;
+    background-image:url(/데일리+실습_web_03_4_P/header.jpg);
+}
+
+.info {
+    width : 100%
+    height: 60px;
+}
+
+.footbox {
+    width:100%;
+    height : 350px;
+}
+
+.foothead {
+    text-align:center;
+    width:100%;
+    height:40px;
+}
+

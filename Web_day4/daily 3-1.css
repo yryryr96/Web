@@ -1,0 +1,11 @@
+.btn {
+    width:500px;
+}
+
+.container {
+    justify-content: start
+}
+
+.container > a {
+    margin-right:30px;
+}
