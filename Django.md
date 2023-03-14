@@ -125,26 +125,75 @@
 
 - ### 요청과 응답
 
-  - 가상환경 생성 > 프로젝트 생성 > 앱 생성
-
-    - python -m venv venv
-    - source venv/Scripts/activate
-    - pip install django==3.2.18
-    - django-admin startproject firstpjt
-    - python manage.py runserver
-    - python manage.py startapp articles > settings.py 의 INSTALLED_APPS 에 추가 
-    - urls.py 작성 > from articles import views > path('articles/', views.index)
-    - views.py 에서 index 함수 정의 > from django.http import HttpResponse
-    - views의 HttpResponse 불편하므로 articles/templates/articles/index.html 생성
-    - render(request, template_name, context )
+  - Django를 이용한 프로젝트,App 생성 순서 ( 가상환경 생성 > 프로젝트 생성 > 앱 생성 > 동작)
+    - python -m venv venv ( 가상환경 생성)
+    - source venv/Scripts/activate  ( 가상환경 활성화 )
+    - pip install django==3.2.18  ( 장고 설치 )
+    - django-admin startproject firstpjt ( 프로젝트 생성 )
+    - python manage.py runserver ( 서버 실행 , 순서 상관없음)
+    - python manage.py startapp articles > settings.py 의 INSTALLED_APPS 에 추가 ( App 생성)
+    - urls.py 작성 > from articles import views > path('articles/', views.index) ( urls path 추가)
+    - views.py 에서 index 함수 정의 > from django.http import HttpResponse ( 동작 설정 )
+    - views의 HttpResponse 불편하므로 articles/templates/articles/index.html 생성 ( 함수 페이지에 나타낼 자료를 html에 따로 작성해서 연결 render 함수 사용 )
+    - render( request, template_name, context )
       - request : 응답을 생성하는 데 사용되는 요청 객체
       - template_name : 템플릿의 전체 이름 또는 템플릿 이름의 경로
       - context : 템플릿에서 사용할 데이터 (딕셔너리 타입으로 작성)
 
-    
 
-  - Django의 세가지 구조 MTV ( Model, View, Template)
 
-  - 코드 작성 순서
+- ### Django's Design Pattern
 
-    - urls.py > views.py > templates
+  - **MVC** : Model - View - Controller : 데이터 및 논리 제어를 구현하는데 널리 사용되는 소프트웨어 디자인 패턴
+  - 하나의 큰 프로그램을 세가지 역할로 구분한 개발 방법론
+    - Model : 데이터와 관련된 로직을 관리
+    - View : 레이아웃과 화면을 처리
+    - Controller : 명령을 model과 view 부분으로 연결
+  - MVC 소프트웨어 디자인 패턴의 목적
+    - 관심사 분리
+    - 더 나은 업무의 분리와 향상된 관리를 제공
+    - 각 부분을 독립적으로 개발할 수 있어, 하나를 수정하고 싶을 때 독립적으로 관리 가능
+      - 개발 효율성 및 유지보수가 쉬워짐
+      - 다수의 멤버로 개발하기 용이함
+
+  
+
+- ### Django 에서의 디자인 패턴
+
+  - Django는 MVC 패턴을 기반으로 한 MTV 패턴을 사용
+  - 두 패턴은 서로 크게 다른 점은 없으며 일부 역할에 대해 부르는 이름이 다름
+
+<img src="images\image-20230314141833268.png" alt="image-20230314141833268" style="zoom:80%;" />
+
+
+
+- ### MTV 디자인 패턴
+
+  - #### Model
+
+    - MVC 패턴에서 Model의 역할에 해당
+    - 데이터와 관련된 로직을 관리
+    - 응용프로그램의 데이터 구조를 정의하고 데이터베이스의 기록을 관리
+
+  - #### Template
+
+    - 레이아웃과 화면을 처리
+    - 화면상의 사용자 인터페이스 구조와 레이아웃을 정의
+    - MVC 패턴에서 View의 역할에 해당
+
+  - #### View
+
+    - Model & Template과 관련한 로직을 처리해서 응답을 반환
+    - 클라이언트의 요청에 대해 **처리**를 분기하는 역할
+    - 동작 예시
+      - 데이터가 필요하다면 model에 접근해서 데이터를 가져오고 가져온 데이터를 template로 보내 화면을 구성하고 구성된 화면을 응답으로 만들어 클라이언트에게 반환
+    - MVC 패턴에서 Controller의 역할에 해당
+
+<img src="images\image-20230314142313337.png" alt="image-20230314142313337" style="zoom:80%;" />
+
+- ### 정리 
+
+  - Django는 MTV 디자인 패턴을 가지고 있음
+    - Model : 데이터 관련
+    - Template : 화면 관련
+    - View : Model & Template 중간 처리 및 응답 변환
