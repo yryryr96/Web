@@ -197,3 +197,142 @@
     - Model : 데이터 관련
     - Template : 화면 관련
     - View : Model & Template 중간 처리 및 응답 변환
+
+
+
+- ### Django Template Language (DTL)
+
+  - Django template에서 사용하는 built-in template system
+  - 조건,반복,변수 치환, 필터 등의 기능 제공
+    - python처럼 일부 프로그래밍 구조(if, for 등)를 사용할 수 있지만 이것은 python 코드로 실행되는 것이 아니다.
+    - Django 템플릿 시스템은 단순히 Python이 HTML에 포함 된 것이 아니니 주의
+  - 프로그래밍적 로직이 아니라 프레젠테이션을 표현하기 위한 것임을 명심!!!
+
+
+
+- ### DTL Syntax
+
+  - #### Variable
+
+    - 변수명은 영어, 숫자와 밑줄(_)의 조합으로 구성될 수 있으나 밑줄로는 시작할 수 없음.
+
+      - 공백이나 구두점 문자 또한 사용할 수 없음
+
+    - dot(.)를 사용해 변수 속성에 접근할 수 있다.
+
+    - render()의 세번째 인자로 {'key': value}와 같이 딕셔너리 형태로 넘겨주며, 여기서 정의한 key에 해당하는 문자열이 template에서 사용가능한 변수명이 됨
+
+      - ```python
+        # views.py
+        
+        #1
+        def index(request):
+        	name = 'aiden'
+            return render(request,'myapp/index.html',{'name' : name})
+        #2
+        def index(request):
+            info = {
+                'name' : 'aiden',
+                'age' : 21,
+            }
+            
+            return render(request,'myapp/index.html',{'info' : info})
+        
+        # index.html
+        <body>
+        	<h1>info.name</h1> # aiden
+            <h1>info.age</h1> # 21
+        </body>
+        ```
+
+  - #### Filter { | }
+
+    - 표시할 변수를 수정할 때 사용 > 변수 자체를 변경하는것이 아닌 보여지는 값만 바뀜
+    - {{ name | lower }} : name 변수를 모두 소문자로 출력
+    - 60개의 builtin template filters를 제공
+    - chained가 가능하며 일부 필터는 인자를 받기도 함 {{ name|add:30 }}
+
+  - #### Tags {% tag %}
+
+    - 출력 텍스트를 만들거나, 반복 또는 논리를 수행하여 제어 흐름을 만드는 등 변수보다 복잡한 일들을 수행
+    - 일부 태그는 시작과 종료 태그가 필요 {% if %}{% endif %}
+    - 약 24개의 built-in template tags를 제공
+
+  - #### Comments {# #}
+
+    - Django template 에서 라인의 주석을 표현하기 위해 사용
+    - 유효하지 않은 템플릿 코드가 포함될 수 있음
+    - 한 줄 주석에만 사용할 수 있음 ( 줄 바꿈이 허용되지 않음 )
+    - 여러 줄 주석은 {% comment %} 와 {% endcomment %} 사이에 입력
+
+
+
+- ### Template 상속
+
+  - 템플릿 상속은 기본적으로 코드의 재사용성에 초점을 맞춤
+
+  - 템플릿 상속을 사용하면 사이트의 모든 공통 요소를 포함하고, 하위 템플릿이 재정의 할 수 있는 블록을 정의하는 기본 'skeleton' 템플릿을 만들 수 있음
+
+  - #### 템플릿 상속에 관련된 태그
+
+    - ##### {% extends '' %}
+
+      - 자식 (하위) 템플릿이 부모 템플릿을 확장한다는 것을 알림
+      - 반드시 템플릿 최상단에 작성 되어야 함 (1개만)
+
+    - ##### {% block content %}{% endblock content %}
+
+      - 하위 템플릿에서 재지정할 수 있는 블록을 정의
+      - 즉, 하위 템플릿이 채울 수 있는 공간
+      - 가독성을 높이기 위해 선택적으로 endblock 태그에 이름을 지정할 수 있음 ( 빼도 된다 )
+        - {% endblock %} 하나 {% endblock content %} 하나 똑같다.
+
+  - #### Django의 template 처리
+
+    - <img src="images\image-20230315120135672.png" alt="image-20230315120135672" style="zoom: 80%;" />
+    - base.index를 프로젝트의 최상위 폴더에 만들어두고 여러앱에서 사용할 수 있도록 하려면 아래 그림처럼 설정
+
+<img src="images\image-20230315120207271.png" alt="image-20230315120207271" style="zoom:80%;" />
+
+
+
+- ### Trailing Slashes
+
+  - Django는 URL 끝에 /가 없다면 자동으로 붙여주는 것이 기본 설정
+
+    - 모든 주소가 '/' 로 끝나도록 구성 되어있다.
+    - 그러나 모든 프레임워크가 이렇게 동작하는 것은 아니다.
+
+  - Django의 url 설계 철학을 통해 먼저 살펴보자.
+
+    - ##### "기술적인 측면에서, foo.com/bar 와 foo.com/bar/ 는 서로 다른 URL이다. "
+
+    - 검색 엔진 로봇이나 웹 트래픽 분석 도구에서는 그 둘을 서로 다른 페이지로 본다.
+
+    - Django는 URL을 정규화하여 검색 엔진 로봇이 혼동하지 않도록 해야 한다.
+
+
+
+- ### Variable routing
+
+  - URL 주소를 변수로 사용하는 것을 의미한다.
+  - URL의 일부를 변수로 지정해 view 함수의 인자로 넘길 수 있다.
+  - 즉, 변수 값에 따라 하나의 path()에 여러 페이지를 연결 시킬 수 있다.
+
+<img src="images\image-20230315121641788.png" alt="image-20230315121641788" style="zoom:80%;" />
+
+![image-20230315121741309](images\image-20230315121741309.png)
+
+
+
+- ### App URL mapping
+
+  - 앱이 많아졌을 때 urls.py를 각 app에 매핑하는 방법을 이해하기
+  - 두 번째 app인 pages를 생성 및 등록
+  - 예로 App 들의 view 함수들은 이름이 같으므로 from app import views as app_views 식으로 각각 import해도 되지만 너무 불편하다. 더 좋은 방법은??
+    - urls.py 를 쪼갠다
+    - 하나의 프로젝트에 여러 앱이 존재하면 각각의 앱 안에 urls.py를 만들고 프로젝트 urls.py에서 각 앱의 urls.py 파일로 URL 매핑을 위탁할 수 있다.
+
+<img src="images\image-20230315134450870.png" alt="image-20230315134450870" style="zoom: 50%;" />
+
+<img src="images\image-20230315134633690.png" alt="image-20230315134633690" style="zoom: 80%;" />
