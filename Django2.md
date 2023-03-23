@@ -69,3 +69,150 @@
   2. STATICFILES_DIRS
      - 기본경로 외에 추가적인 정적 파일 경로 목록을 정의하는 리스트
      - 추가 파일 디렉토리에 대한 전체 경로를 포함하는 문자열 목록으로 작성되어야한다.
+
+
+
+- ### Django authentication system
+
+  - #### 개요
+
+    - Django authentication system은 인증과 권한 부여를 함께 제공(처리)하며, 이러한 기능을 일반적으로 인증 시스템이라고 한다.
+    - 필수 구성은 settings.py에 이미 포함되어 있으며 INSTALLED_APPS에서 확인이 가능하다. (django.contrib.auth)
+    - Authentication(인증)
+      - 신원 확인
+      - 사용자가 자신이 누구인지 확인하는 것
+    - Authorization (권한,허가)
+      - 권한 부여
+        - 인증된 사용자가 수행할 수 있는 작업을 결정
+
+- ### Custom User model
+
+  - 개발자들이 작성하는 일부 프로젝트에서는 django에서 제공하는 built-in User model의 기본 인증 요구사항이 적절하지 않을 수 있다.
+    - 예를 들어, 내 서비스에서 회원가입 시 username 대신 email을 식별 값으로 사용하는 것이 더 적합한 사이트인 경우, Django의 User Model은 기본적으로 username를 식별 값으로 사용하기 때문에 적합하지 않다.
+    - Django는 현재 프로젝트에서 사용할 User Model을 결정하는 AUTH_USER_MODEL 설정 값으로 Default User Model을 재정의(override) 할 수 있도록 한다.
+
+
+
+
+
+- ### 쿠키 (Cookie)
+
+  - #### 개요
+
+    - HTTP 쿠키는 상태가 있는 세션을 만들도록 해준다.
+    - 웹 서비스는 언제 / 어디서나 / 누구에게나 열려있다.
+    - 접근성을 챙긴대신 클라이언트를 구분해서 관리하기 어렵기 때문에 서버에서 클라이언트를 구분할 수단으로 쿠키를 사용??
+
+    
+
+  - #### 개념
+
+    - 서버가 사용자의 웹 브라우저에 전송하는 작은 데이터 조각
+    - 사용자가 웹사이트를 방문할 경우 해당 웹사이트의 서버를 통해 사용자의 컴퓨터에 설치되는 작은 기록 정보 파일
+      - 브라우저(클라이언트)는 쿠키를 로컬에 KEY-VALUE의 데이터 형식으로 저장
+      - 이렇게 쿠키를 저장해 놓았다가, 동일한 서버에 재요청 시 저장된 쿠키를 함께 전송
+    - 쿠키는 두 요청이 동일한 브라우저에서 들어왔는지 아닌지를 판단할 때 주로 사용된다.
+      - 이를 이요야해 사용자의 로그인 상태를 유지할 수 있다.
+      - 상태가 없는 HTTP 프로토콜에서 상태 정보를 기억시켜 주기 때문
+    - 즉, 웹 페이지에 접속하면 웹 페이지를 응답한 서버로부터 쿠키를 받아 브라우저에 저장하고, 클라이언트가 같은 서버에 재요청 시마다 요청과 함께 저장해 두었던 쿠키도 함께 전송
+
+  - #### 쿠키 사용 예시
+
+  - <img src="images\image-20230322100802957.png" alt="image-20230322100802957" style="zoom:67%;" />
+
+  - #### 쿠키 사용 목적
+
+    - 세션 관리(Session management)
+      - 로그인, 아이디 자동완성, 공지 하루 안보기, 팝업 체크, 장바구니 등의 정보 관리
+    - 개인화 (Personalization)
+      - 사용자 선호, 테마 등의 설정
+    - 트래킹 (Tracking)
+      - 사용자 행동을 기록 및 분석
+
+  
+
+  - #### 세션 (Session)
+
+    - 사이트와 특정 브라우저 사이의 "state(상태)" 를 유지시키는 것
+
+    - 클라이언트가 서버에 접속하면 서버가 특정 session id를 발급하고, 클라이언트는 session id를 쿠키에 저장
+
+      - 클라이언트가 다시 동일한 서버에 접속하면 요청과 함께 쿠키(session id가 저장된)를 서버에 전달
+      - 쿠키는 요청 때마다 서버에 함께 전송 되므로 서버에서 session id를 확인해 알맞은 로직 처리
+
+    - session id는 세션을 구별하기 위해 필요하며, 쿠키에는 session id만 저장
+
+    - #### 과정
+
+      - 서버에는 session table 이 있다 (session id : value) , value에는 민감한 정보 수용 가능 -> 테이블이 서버에 있기 때문
+      - 클라이언트가 로그인 요청 -> 쿠키를 서버에 전달 -> 서버에서 쿠키를 열어 session id 비교해서 로직 처리
+
+  - #### 쿠키 Lifetime (수명)
+
+    1. Session cookie
+       - 현재 세션이 종료되면 삭제된다.
+       - 브라우저 종료와 함께 세션이 삭제된다.
+    2. Persistent cookies
+       - Expires 속성에 지정된 날짜 혹은 Max-Age 속성에 지정된 기간이 지나면 삭제된다.
+
+  - #### Session in Django
+
+    - **Django는 database-backed sessions** 저장 방식을 기본 값으로 사용
+      - session 정보는 Django DB의 **django_session 테이블**에 저장
+      - Django는 특정 ssesion id를 포함하는 쿠키를 사용해 각각의 브라우저와 사이트가 연결된 session을 알아낸다.
+
+  
+
+- ### Login
+
+  - #### 개요
+
+    - 로그인은 session을 create하는 과정
+
+```python
+from django.shortcuts import render,redirect
+from django.contrib.auth import login as auth_login
+
+def login(request):
+    if request.method == 'POST' : # db의 데이터를 변환 시키기 때문에 POST
+        form = AuthenticationForm(request, request.POST)
+        #form = AuthenticationForm(request, data = request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect('articles:index')
+    else:
+        form = AuthenticationForm()
+    context = {
+        'form' : form,
+    }
+    return render(request, 'accounts/login.html',context)
+            
+```
+
+
+
+- ### Logout
+
+  - 개요
+    - 로그아웃은 클라이언트와 db의 session을 delete하는 과정
+      - 현재 요청에 대한 session data를 db에서 삭제
+      - 클라이언트의 쿠키에서도 session id를 삭제
+      - 이는 다른 사람이 동일한 웹 브라우저를 사용해 로그인하고, 이전 사용자의 세션 데이터에 접근하는 것을 방지하기 위함이다.
+
+```python
+from django.contrib.auth import logout as auth_logout
+
+def logout(request):
+    auth_logout(request)
+    return redirect('articles:index')
+```
+
+
+
+- #### templates 에서 user 사용하기 
+
+  https://docs.djangoproject.com/en/4.0/ref/contrib/auth/
+
+  
+
+  
