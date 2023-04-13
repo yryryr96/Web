@@ -36,12 +36,12 @@
 
   - urls.py , views.py 에서 login 경로, 함수 설정 logout도 마찬가지
 
-  - login 함수에서 사용되는거 AuthentificationForm() >> from django.contrib.auth.forms import AuthentificationForm
+  - login 함수에서 사용되는거 AuthenticationForm() >> from django.contrib.auth.forms import AuthenticationForm
 
   - ```python
     def login(request):
     	if request.method == 'POST' :
-            form = AuthentificationForm(request, request.POST)
+            form = AuthenticationForm(request, request.POST)
             if form.is_valid():
                 auth_login(request, form.get_user())
                 return rediect('articles:index')
