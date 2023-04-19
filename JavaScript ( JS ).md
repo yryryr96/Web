@@ -163,3 +163,146 @@
       mySub(1,2) // -1
       namedSub(1,2) // ReferenceError : namedSub is not defined
       ```
+
+
+
+- ### this
+
+  - 어떤 object를 가리키는 키워드 ( python : self, java : this )
+
+  - 함수를 호출할 때 함수가 어떻게 호출 되었는지에 따라 동적으로 결정된다.
+
+  - obj.functioncall () -> this ===obj, 나머지 this === window object(global)
+
+  - ```js
+    // 함수 문맥에서 this
+    
+    // Nested (Function 키워드)
+    const myObj = {
+        numbers: [1],
+        myFunc() {
+            console.log(this) // myObj
+            this.numbers.forEach(function (num){
+                console.log(num) // 1
+                console.log(this) // window
+            })
+        }
+    }
+    // 단순 호출 방식으로 사용됐을 때 this 는 전역 객체 window를 가리킴
+    
+    // Nested (Arrow Function)
+    const myObj = {
+        numbers: [1],
+        myFunc(){
+            console.log(this) // myObj
+            this.numbers.forEach((number) => {
+                console.log(number) // 1
+                console.log(this) // myObj
+            })
+        }
+    }
+    // 자동으로 한 단계 상위의 scope의 context를 바인딩, 여기서 this는 자신을 감싼 정적 범위
+    ```
+
+
+
+- ### 객체 관련 문법
+
+- ```js
+  const person = {
+      name : 'victor',
+      age : 30,
+      greeting : function() {
+          console.log(`hello,my name is ${this.name}.`)
+      }
+  }
+  
+  console.log(person.name)
+  console.log(person['age'])
+  person.greeting()
+  
+  function Member(name,age,sId) {
+      this.name = name
+      this.age = age
+      this.sId = sId
+  }
+  
+  // 클래스 같은 느낌인가?
+  const member3 = new Member('isaac',20,1231290312)
+  console.log(member3)
+  
+  // 속성명 축약
+  const books = ['Learning','JavaScript']
+  const magazines = ['Vogue','Science']
+  
+  const bookshop = {
+      books,
+      magazines,
+  }
+  
+  console.log(bookshop)
+  
+  //메서드명 축약
+  const obj = {
+      greeting() {
+          console.log('Hi')
+      }
+  }
+  obj.greeting()
+  
+  // 객체를 정의할 때 key의 이름을 동적으로 생성 가능
+  const key = 'country'
+  const value = ['korea','japan','france','china']
+  
+  const Obj = {
+      [key] : value,
+  }
+  
+  console.log(Obj) // country : ['korea','japan','france','china']
+  console.log(Obj.country) // ['korea','japan','france','china']
+  
+  // 구조 분해 할당
+  const userInformation = {
+      name : 'ssafy kim',
+      userId : 'ssafyStudent1234',
+      email : 'ssafy@ssafy.com'
+  }
+  
+  const {name,userId,email} = userInformation
+  // const name = userInformation.name
+  console.log(name,userId,email) // ssafy kim ssafyStudent1234 ssafy@ssafy.com
+  
+  // Spread syntax(...)
+  const OBJ = { b:2,c:3,d:4 }
+  const newOBJ = {a:1, ...OBJ, e : 5}
+  console.log(newOBJ) // {a:1, b:2, c:3, d:4, e:5}
+  ```
+
+
+
+- ### JSON (JavaScript Object Notation)
+
+  - key-value 형태로 이루어진 자료 표기법
+  - JS의 Object와 유사한 구조이지만 JSON 은 형식이 있는 문자열
+  - JSON을 Object로 사용하기 위한 변환 작업이 필요
+
+```js
+// JSON 변환
+const jsObject = {
+    coffee : 'Americano',
+    iceCream : 'Cookie and Cream',
+}
+
+// Obj -> JSON
+const objToJson = JSON.stringify(jsObject)
+
+console.log(jsObject)
+console.log(objToJson)
+console.log(typeof objToJson) // String
+
+//JSON -> Obj
+const jsonToObj = JSON.parse(objToJson)
+console.log(jsonToObj)
+console.log(typeof jsonToObj) // Object
+```
+
