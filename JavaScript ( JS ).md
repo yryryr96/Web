@@ -93,7 +93,7 @@
 
 - #### 호이스팅 (hoisting) 
 
-  - 변수를 선언 이전에 참조할 수 있는 현상
+  - 식별자를 선언 이전에 참조할 수 있는 현상
   - var로 선언된 변수는 선언 이전에 참조할 수 있으며, 이러한 현상을 호이스팅이라 한다.
   - 변수 선언 이전의 위치에서 접근 시 undefined를 반환
   - 인터프리터가 변수와 함수의 메모리 공간을 선언 전에 미리 할당하는 것 > 변수의 선언과 초기화를 분리한 후, 선언만 코드의 최상단으로 옮기는 것
@@ -120,12 +120,13 @@
 - ##### null 
 
   - null 값을 나타내는 특별한 키워드
-  - 변수의 값이 없음을 의도적으로 표현할 때 사용
+  - 변수의 값이 없음을 **의도적**으로 표현할 때 사용
 
 - ##### undefined
 
   - 값이 정의되어 있지 않음을 표현하는 값
   - 변수 선언 이후 직접 값을 할당하지 않으면 자동으로 할당 된다.
+  - 개발자들의 실수 (?)
 
 
 
@@ -144,10 +145,16 @@
           return num1+num2
       }
       add(2,7) // 9
+      
+      // 함수 호이스팅
+      add(2,7)
+      function add(num1, num2) {
+          return num1 + num2
+      }
       ```
-
+      
     - 함수 표현식
-
+    
     - ```js
       const sub = function(num1,num2) {
           return num1 - num2
@@ -162,6 +169,13 @@
       
       mySub(1,2) // -1
       namedSub(1,2) // ReferenceError : namedSub is not defined
+      
+      
+      // 변수 호이스팅
+      sub(7,2)
+      const sub = function(num1,num2) {
+          return num1 - num2
+      }
       ```
 
 
@@ -217,9 +231,9 @@
       }
   }
   
-  console.log(person.name)
-  console.log(person['age'])
-  person.greeting()
+  console.log(person.name)	//victor
+  console.log(person['age'])	// 30
+  person.greeting()			// hello,my name is victor
   
   function Member(name,age,sId) {
       this.name = name
@@ -227,7 +241,7 @@
       this.sId = sId
   }
   
-  // 클래스 같은 느낌인가?
+  // 클래스 같은 느낌인가? new 가 붙으면 생성자 함수로 동작
   const member3 = new Member('isaac',20,1231290312)
   console.log(member3)
   
