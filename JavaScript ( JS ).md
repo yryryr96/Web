@@ -93,7 +93,7 @@
 
 - #### 호이스팅 (hoisting) 
 
-  - 변수를 선언 이전에 참조할 수 있는 현상
+  - 식별자를 선언 이전에 참조할 수 있는 현상
   - var로 선언된 변수는 선언 이전에 참조할 수 있으며, 이러한 현상을 호이스팅이라 한다.
   - 변수 선언 이전의 위치에서 접근 시 undefined를 반환
   - 인터프리터가 변수와 함수의 메모리 공간을 선언 전에 미리 할당하는 것 > 변수의 선언과 초기화를 분리한 후, 선언만 코드의 최상단으로 옮기는 것
@@ -144,16 +144,18 @@
           return num1+num2
       }
       add(2,7) // 9
+      
+      // 호이스팅이 일어난다면 함수 호이스팅
       ```
-
+      
     - 함수 표현식
-
+    
     - ```js
       const sub = function(num1,num2) {
           return num1 - num2
       }
       sub(7,2) // 5
-      
+      // 호이스팅이 일어나면 변수 호이스팅
       // 함수의 이름이 없다 : 익명 함수
       // 함수의 이름 명시 가능 -> 호출로는 못쓰고 디버깅용도
       const mySub = function namedSub(num1,num2) {
@@ -306,3 +308,9 @@ console.log(jsonToObj)
 console.log(typeof jsonToObj) // Object
 ```
 
+
+
+- ### DOM ( Document Object Model )
+
+  - 문서의 구조화된 표현을 제공하며 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공
+  - HTML 문서를 구조화 하여 각 요소를 객체로 취급
