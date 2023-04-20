@@ -146,11 +146,15 @@
       }
       add(2,7) // 9
       
+<<<<<<< HEAD
       // 함수 호이스팅
       add(2,7)
       function add(num1, num2) {
           return num1 + num2
       }
+=======
+      // 호이스팅이 일어난다면 함수 호이스팅
+>>>>>>> 0cc9b175fa7e1eeba46c9cf45d39e1747e5dc8fd
       ```
       
     - 함수 표현식
@@ -160,7 +164,7 @@
           return num1 - num2
       }
       sub(7,2) // 5
-      
+      // 호이스팅이 일어나면 변수 호이스팅
       // 함수의 이름이 없다 : 익명 함수
       // 함수의 이름 명시 가능 -> 호출로는 못쓰고 디버깅용도
       const mySub = function namedSub(num1,num2) {
@@ -320,3 +324,9 @@ console.log(jsonToObj)
 console.log(typeof jsonToObj) // Object
 ```
 
+
+
+- ### DOM ( Document Object Model )
+
+  - 문서의 구조화된 표현을 제공하며 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공
+  - HTML 문서를 구조화 하여 각 요소를 객체로 취급
