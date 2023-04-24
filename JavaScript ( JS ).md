@@ -146,6 +146,7 @@
       }
       add(2,7) // 9
       
+
 <<<<<<< HEAD
       // 함수 호이스팅
       add(2,7)
@@ -155,8 +156,9 @@
 =======
       // 호이스팅이 일어난다면 함수 호이스팅
 >>>>>>> 0cc9b175fa7e1eeba46c9cf45d39e1747e5dc8fd
-      ```
       
+      ```
+
     - 함수 표현식
     
     - ```js
@@ -173,8 +175,9 @@
       
       mySub(1,2) // -1
       namedSub(1,2) // ReferenceError : namedSub is not defined
-      
-      
+
+
+​      
       // 변수 호이스팅
       sub(7,2)
       const sub = function(num1,num2) {
@@ -330,3 +333,20 @@ console.log(typeof jsonToObj) // Object
 
   - 문서의 구조화된 표현을 제공하며 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공
   - HTML 문서를 구조화 하여 각 요소를 객체로 취급
+
+
+
+- ### EVENT
+
+  - HTML 요소에서 발생하는 모든 상황
+  - 예시 : 키보드 키 입력, 브라우저 닫기, 데이터 제출, 텍스트 복사 등등
+
+- Event object
+
+  - 네트워크 활동이나 사용자와의 상호작용 같은 사건의 발생을 알리기 위한 객체
+  - 이벤트가 발생했을 때 생성되는 객체
+  - DOM 요소는 Event를 받고 ("수신")
+  - 받은 Event를 "처리" 할 수 있음
+    - Event 처리는 주로 addEventListener() 메서드를 통해 Event 처리기를 다양한 html 요소에 "부착"해서 처리
+  - " **대상**에 **특정 Event**가 발생하면, **할 일**을 등록하자"
+  - **EventTarget**.addEventListener(**type**, **handler function**)
