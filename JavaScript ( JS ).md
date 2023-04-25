@@ -146,46 +146,38 @@
       }
       add(2,7) // 9
       
-
-<<<<<<< HEAD
       // 함수 호이스팅
       add(2,7)
       function add(num1, num2) {
           return num1 + num2
-      }
-=======
+      	}   
       // 호이스팅이 일어난다면 함수 호이스팅
->>>>>>> 0cc9b175fa7e1eeba46c9cf45d39e1747e5dc8fd
-      
       ```
-
+      
     - 함수 표현식
     
     - ```js
       const sub = function(num1,num2) {
           return num1 - num2
-      }
+      	}
       sub(7,2) // 5
       // 호이스팅이 일어나면 변수 호이스팅
       // 함수의 이름이 없다 : 익명 함수
       // 함수의 이름 명시 가능 -> 호출로는 못쓰고 디버깅용도
       const mySub = function namedSub(num1,num2) {
           return num1-num2
-      }
+      	}
       
       mySub(1,2) // -1
       namedSub(1,2) // ReferenceError : namedSub is not defined
-
-
-​      
       // 변수 호이스팅
       sub(7,2)
       const sub = function(num1,num2) {
           return num1 - num2
-      }
+      	}
       ```
 
-
+​     
 
 - ### this
 
@@ -350,3 +342,72 @@ console.log(typeof jsonToObj) // Object
     - Event 처리는 주로 addEventListener() 메서드를 통해 Event 처리기를 다양한 html 요소에 "부착"해서 처리
   - " **대상**에 **특정 Event**가 발생하면, **할 일**을 등록하자"
   - **EventTarget**.addEventListener(**type**, **handler function**)
+
+
+
+- ### 동기와 비동기
+
+  - #### 동기 ( Synchronous )
+
+    - 모든 일을 순서대로 하나씩 처리하는 것
+    - python 코드 처럼 작동
+
+    
+
+  - #### 비동기식 ( Asynchronous )
+
+    - 작업을 시작한 후 결과를 기다리지 않고 다음 작업을 처리하는 것 ( 병렬적 수행 )
+    - 끝나는 시간이 일정하지 않다.
+
+
+
+- ### JavaScript의 비동기 처리 
+
+  - JavaScript는 한 번에 하나의 일만 수행할 수 있는 Single Thread 언어이다.
+
+```markdown
+Thread ?
+작업을 처리할 때 실제로 작업을 수행하는 주체
+프로그램 -> 파일 -> 프로세스 -> Thread (처리)
+```
+
+
+
+- ### 비동기 처리 동작 방식 
+
+1. 모든 작업은 Call Stack(LIFO) 으로 들어간 후 처리된다.
+2. 오래 걸리는 작업이 Call Stack으로 들어오면 Web API로 보내 별도로 처리하도록 한다.
+
+3. Web API에서 처리가 끝난 작업들은 곧바로 Call Stack으로 들어가지 못하고 Task Queue(FIFO)에 순서대로 들어간다.
+4. Event Loop가 Call Stack이 비어 있는 것을 계속 체크하고 Call Stack이 빈다면 Task Queue에서 가장 오래된 (가장 앞에 있는) 작업을 Call Stack으로 보낸다.
+
+```Js
+console.log('Hi')
+
+setTimeout(function ssafy() {
+    console.log('SSAFY')
+},3000)
+console.log('Bye')
+
+1. Call Stack 에 console.log('Hi') 저장 -> 바로 출력
+2. ssafy() CallStack에 저장 -> Web API 넘겨야 하는것들은 Web API에 저장 (3초) (0초여도 마찬가지)
+3. console.log('Bye') Call Stack에 저장 -> 바로 출력
+4. Web API 에서 Task Queue 로 ssafy() 저장 -> Call Stack 비어있는지 확인 후 비었다면 실행
+```
+
+
+
+- ### 비동기 처리의 단점
+
+  - 비동기 처리의 핵심은 작업이 완료되는 순서에 따라 처리한다는 것
+
+  - 코드의 실행 순서가 불명확하다는 단점이 있다.
+
+    - 이를 해결하기 위해 콜백 함수를 썼는데 가독성, 유지보수 측면에서 사용 불편 -> Promise
+
+  - ##### Promise (Web API 안에서 순서를 정하기 위해 사용??)
+
+    - 비동기 작업의 완료 또는 실패를 나타내는 객체
+    - then(callback), catch(callback), 
+
+![image-20230425103101137](images\image-20230425103101137.png)
