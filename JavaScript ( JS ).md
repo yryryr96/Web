@@ -31,8 +31,6 @@
 
     
 
-  
-
 - #### let
 
   - 생략 불가능
@@ -126,7 +124,7 @@
 
   - 값이 정의되어 있지 않음을 표현하는 값
   - 변수 선언 이후 직접 값을 할당하지 않으면 자동으로 할당 된다.
-  - 개발자들의 실수 (?)
+  - 개발자들의 실수를 넘어가주기 위해 사용(?)
 
 
 
@@ -170,11 +168,12 @@
       
       mySub(1,2) // -1
       namedSub(1,2) // ReferenceError : namedSub is not defined
-      // 변수 호이스팅
+      
       sub(7,2)
       const sub = function(num1,num2) {
           return num1 - num2
       	}
+      // 변수 호이스팅
       ```
 
 ​     
@@ -376,7 +375,7 @@ Thread ?
 - ### 비동기 처리 동작 방식 
 
 1. 모든 작업은 Call Stack(LIFO) 으로 들어간 후 처리된다.
-2. 오래 걸리는 작업이 Call Stack으로 들어오면 Web API로 보내 별도로 처리하도록 한다.
+2. 특정 작업이 Call Stack으로 들어오면 Web API로 보내 별도로 처리하도록 한다.
 
 3. Web API에서 처리가 끝난 작업들은 곧바로 Call Stack으로 들어가지 못하고 Task Queue(FIFO)에 순서대로 들어간다.
 4. Event Loop가 Call Stack이 비어 있는 것을 계속 체크하고 Call Stack이 빈다면 Task Queue에서 가장 오래된 (가장 앞에 있는) 작업을 Call Stack으로 보낸다.
@@ -405,9 +404,20 @@ console.log('Bye')
 
     - 이를 해결하기 위해 콜백 함수를 썼는데 가독성, 유지보수 측면에서 사용 불편 -> Promise
 
-  - ##### Promise (Web API 안에서 순서를 정하기 위해 사용??)
+    - ##### Callback 함수란 ?
 
+      - 다른 함수의 인자가 되거나 특정 함수가 시작되기 전에 실행되지 않는 함수
+  
+  - ##### Promise (Web API 안에서 순서를 정하기 위해 사용??)
+  
     - 비동기 작업의 완료 또는 실패를 나타내는 객체
-    - then(callback), catch(callback), 
+    - ##### then(callback)
+    
+      - 요청한 작업이 성공하면 callback 실행
+      - callback은 이전 작업의 성공 결과를 인자로 전달 받는다.
+    - ##### catch(callback)
+    
+      - then()이 하나라도 실패한다면 callback 실행
+      - callback은 이전 작업의 실패 객체를 인자로 전달 받는다.
 
 ![image-20230425103101137](images\image-20230425103101137.png)
