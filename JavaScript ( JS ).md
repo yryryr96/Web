@@ -420,3 +420,10 @@ console.log('Bye')
       - callback은 이전 작업의 실패 객체를 인자로 전달 받는다.
 
 ![image-20230425103101137](images\image-20230425103101137.png)
+
+
+
+- ### AJAX (Asynchronous JavaScript And XML)
+
+  - 비동기 통신을 이용하면 화면 전체를 새로고침 하지 않아도 서버로 요청을 보내고, 데이터를 받아 화면의 일부분만 업데이트 가능
+  - 이러한 '비동기 통신 웹 개발 기술' 을 AJAX라고 한다.
