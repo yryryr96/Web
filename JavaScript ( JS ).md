@@ -406,6 +406,26 @@ console.log('Bye')
     - ##### Callback 함수란 ?
 
       - 다른 함수의 인자가 되거나 특정 함수가 시작되기 전에 실행되지 않는 함수
+      
+      - 함수의 실행순서를 정해주기위해 사용되는 함수
+      
+      - ```JS
+        function getData(callbackFunc) {
+        	$.get('https://domain.com/products/1', function(response) {
+        		callbackFunc(response); // 서버에서 받은 데이터 response를 callbackFunc() 함수에 넘겨줌
+        	});
+        }
+        
+        getData(function(tableData) {
+        	console.log(tableData); // $.get()의 response 값이 tableData에 전달됨
+        });
+        
+        //1. get요청에 의해 반환되는 값 response를 callbackFunc() 함수에 넘겨준다.
+        //2. 위 예제에서 callbackFunc()는 function(tableData) {console.log(tableData)}
+        //3. tableData 는 get요청에 의해 반환된 response를 나타내므로 response를 출력
+        ```
+      
+        
   
   - ##### Promise (Web API 안에서 순서를 정하기 위해 사용??)
   
