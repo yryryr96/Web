@@ -1,0 +1,63 @@
+# Vue (JavaScript Framework)
+
+#### Front-end 개발은 Web App 또는 Web Site의 UI/UX를 제작하고 관리하는 과정
+
+- #### Web App
+
+웹 브라우저에서 실행되는 어플리케이션 소프트웨어
+
+
+
+- #### SPA ( Single Page Application )
+
+  - SPA는 서버에서 최초 1장의 HTML만 전달받아 모든 요청에 대응하는 방식
+    -  Django는 MPA ( Multi Page Application) : 페이지를 새로고침하며 사용자가 요청한 웹 페이지를 보여주는 방식 ( Page Reload )
+  - CSR ( Client Side Rendering ) 방식으로 요청을 처리한다.
+  - SEO ( Search Engine Optimization ) 관리가 어렵다.
+  - 서버의 부하가 적다. ( 필요한 것만 부분적으로 받아오기 때문 )
+  - 초기 랜더링 이후에 빠르다.
+
+
+
+- #### MPA (Multi Page Application)
+
+  - MPA는 HTML의 정보를 모두 가지고 있기 때문에 SEO 관리에 적절하고 쉽다.
+  - 서버의 부하가 많다. ( 모든 정보를 가져오기 때문 )
+  - 초기 랜더링 이후에 느리다.
+
+
+
+- #### SSR (Server Side Rendering )
+
+  - Server가 사용자의 요청에 적합한  HTML을 렌더링하여 제공하는 방식
+  - 전달받은 새 문서를 보여주기 위해 브라우저는 새로고침을 진행 (Page Reload)
+  - 요청을 받고 요청받은대로 모든 것을 구성한 후 Page Reload해서 Client에게 전달
+
+<img src="images\image-20230427091910003.png" alt="image-20230427091910003" style="zoom: 80%;" />
+
+
+
+- #### CSR (Client Side Rendering)
+
+  - 최초 한 장의 HTML을 받아온다.
+    - server로 부터 최초로 받아오는 문서는 빈 html 문서
+  - CSR 방식을 사용하는 이유
+    - 모든 HTML 페이지를 서버로부터 받아서 표시하지 않아도 된다.
+      - 클라이언트-서버 통신 -> 트래픽 감소 -> 응답속도 향상
+    - 매번 새 문서를 받아 새로고침하는 것이 아니라 필요한 부분만 고쳐 나가므로 각 요청이 끊김없이 진행
+    - BE와 FE 작업 영역을 명확히 분리 할 수 있다.
+      - 각자 맡은 역할을 명확히 분리 -> 협업이 용이해진다.
+
+<img src="images\image-20230427092211456.png" alt="image-20230427092211456" style="zoom: 80%;" />
+
+
+
+- #### MVVM Pattern
+
+<img src="images\image-20230427152325110.png" alt="image-20230427152325110" style="zoom:80%;" />
+
+view : 눈에 보이는 부분 ( UI, DOM)
+
+Model : 실제 데이터 ( JSON , 비즈니스 코드 ( 계산적 ))
+
+ViewModel  : 함수가 저장돼있다. 함수 작성 공간
