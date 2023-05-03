@@ -61,3 +61,12 @@ view : 눈에 보이는 부분 ( UI, DOM)
 Model : 실제 데이터 ( JSON , 비즈니스 코드 ( 계산적 ))
 
 ViewModel  : 함수가 저장돼있다. 함수 작성 공간
+
+
+
+- ### Vue CLI
+
+  - npm install -g @vue/cli  : 설치
+  - vue create vue-cli : 프로젝트 생성
+  - cd vue-cli -> npm run serve
+  - node_modules : python의 venv와 비슷한 역할
