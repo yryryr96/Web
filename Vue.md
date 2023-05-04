@@ -70,3 +70,55 @@ ViewModel  : 함수가 저장돼있다. 함수 작성 공간
   - vue create vue-cli : 프로젝트 생성
   - cd vue-cli -> npm run serve
   - node_modules : python의 venv와 비슷한 역할
+
+
+
+- ### Vue State Management
+
+  - ##### Centralized Store
+
+    - 중앙 저장소(store)에 데이터를 모아서 상태 관리
+
+<img src="images\image-20230504091020768.png" alt="image-20230504091020768" style="zoom:80%;" />
+
+- ### Vuex
+
+  - Vuex 왜 쓰냐 ? 
+
+    - props-emit 으로 데이터 전달을 하면 단점이 많다.
+    - 데이터를 통합적으로 관리하기 위해 사용한다 => 상태 관리
+
+  - #### State
+
+    - vue 인스턴스의 data에 해당
+
+    - ##### 중앙에서 관리하는 모든 상태 정보
+
+      - 개별 component가 관리하던 data를 중앙 저장소 (Vuex Store의 state) 에서 관리하게 된다.
+      - 개별 data도 생성 가능
+      - $store.state
+
+  - #### Mutations
+
+    - ##### 실제로 state를 변경하는 유일한 방법
+
+    - vue instance의 methods에 해당하지만 Mutations에서 호출되는 핸들러 함수는 동기적
+
+    - 첫 번째 인자로 state를 받으며, component 혹은 Actions에서 commit() 메서드로 호출된다.
+
+  - #### Actions
+
+    - ##### mutations와 비슷하지만 비동기 작업을 포함할 수 있다는 차이가 있다.
+
+    - state를 직접 변경하지 않고 commit() 메서드로 mutations를 호출해서 state 변경
+
+    - component에서 dispatch() 메서드로 호출된다.
+
+      - dispatch(A,B) : A 호출 요청, B 데이터 전달
+
+    - dispatch(actions 접근) -> actions(요청) -> mutations(적용)
+
+  - #### Getters
+
+    - ##### state를 활용해 계산된 값을 얻고자 할 때 사용
+
